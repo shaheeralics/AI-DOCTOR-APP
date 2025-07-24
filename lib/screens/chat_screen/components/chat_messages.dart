@@ -16,7 +16,7 @@ class ChatMessages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 231, 236, 237), // Same mint green background as login screen
+        color: Colors.transparent, // Transparent to show gradient background
       ),
       child: ListView.builder(
         controller: scrollController,
@@ -48,22 +48,29 @@ class ChatBubble extends StatelessWidget {
             ? MainAxisAlignment.end 
             : MainAxisAlignment.start,
         children: [
+          // Doctor Avatar (only for doctor messages)
           if (!message.isMe) ...[
-            // Doctor avatar for received messages
             Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(78, 207, 214, 0.562).withOpacity(0.1), // Same blue as login button
+                color: kCardBackground,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: const Color.fromARGB(146, 38, 136, 171).withOpacity(0.3),
+                  color: kMedicalBlue.withOpacity(0.3),
                   width: 1,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: kMedicalBlue.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.person,
-                color: Color.fromARGB(165, 38, 129, 171), // Same blue as login button
+                color: kMedicalBlue,
                 size: 18,
               ),
             ),
@@ -79,8 +86,8 @@ class ChatBubble extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: message.isMe 
-                    ? const Color.fromARGB(255, 78, 209, 185)  // User messages - same blue as login button
-                    : Colors.white,    // Doctor messages - white like login input fields
+                    ? kMedicalBlue  // User messages - medical blue
+                    : kCardBackground,    // Doctor messages - white like cards
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(18),
                   topRight: const Radius.circular(18),
@@ -93,7 +100,9 @@ class ChatBubble extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08), // Same shadow as login elements
+                    color: message.isMe 
+                        ? kMedicalBlue.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.08),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -102,68 +111,53 @@ class ChatBubble extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Message Text
                   Text(
                     message.text,
                     style: TextStyle(
-                      fontSize: 16,
                       color: message.isMe 
                           ? Colors.white 
-                          : const Color.fromARGB(255, 45, 110, 112), // Same dark color as login screen text
-                      fontFamily: 'Montserrat', // Same font as login screen
-                      height: 1.3,
+                          : kTextPrimary,
+                      fontSize: 15,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  
                   const SizedBox(height: 4),
-                  
-                  // Timestamp
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        _formatTime(message.timestamp),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: message.isMe 
-                              ? Colors.white.withOpacity(0.7)
-                              : const Color.fromARGB(255, 116, 186, 213).withOpacity(0.6), // Same as login screen hint colors
-                          fontFamily: 'Montserrat', // Same font as login screen
-                        ),
-                      ),
-                      
-                      if (message.isMe) ...[
-                        const SizedBox(width: 4),
-                        Icon(
-                          Icons.done_all,
-                          size: 16,
-                          color: Colors.white.withOpacity(0.7),
-                        ),
-                      ],
-                    ],
+                  Text(
+                    _formatTime(message.timestamp),
+                    style: TextStyle(
+                      color: message.isMe 
+                          ? Colors.white.withOpacity(0.7) 
+                          : kTextSecondary,
+                      fontSize: 11,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
                 ],
               ),
             ),
           ),
           
+          // User Avatar (only for user messages)
           if (message.isMe) ...[
             const SizedBox(width: 8),
-            // User avatar for sent messages
             Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: kPrimaryColor.withOpacity(0.1), // Same dark color as login screen
+                gradient: kMedicalGradient,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: kPrimaryColor.withOpacity(0.3),
-                  width: 1,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: kMedicalBlue.withOpacity(0.3),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.person,
-                color: kPrimaryColor, // Same dark color as login screen
+                color: Colors.white,
                 size: 18,
               ),
             ),

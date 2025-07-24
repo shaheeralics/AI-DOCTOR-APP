@@ -41,10 +41,10 @@ class _ChatInputState extends State<ChatInput> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: kCardBackground,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: kMedicalBlue.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -82,10 +82,10 @@ class _ChatInputState extends State<ChatInput> {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: kBackgroundColor.withOpacity(0.3),
+                    color: kBackgroundColor.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(25),
                     border: Border.all(
-                      color: kPrimaryColor.withOpacity(0.2),
+                      color: kMedicalBlue.withOpacity(0.2),
                       width: 1,
                     ),
                   ),
@@ -140,8 +140,16 @@ class _ChatInputState extends State<ChatInput> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: _hasText ? kSecondaryColor : kPrimaryColor.withOpacity(0.1),
+                  gradient: _hasText ? kMedicalGradient : null,
+                  color: _hasText ? null : kMedicalBlue.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
+                  boxShadow: _hasText ? [
+                    BoxShadow(
+                      color: kMedicalBlue.withOpacity(0.3),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ] : null,
                 ),
                 child: IconButton(
                   onPressed: _hasText ? widget.onSendMessage : () {
@@ -149,7 +157,7 @@ class _ChatInputState extends State<ChatInput> {
                   },
                   icon: Icon(
                     _hasText ? Ionicons.send : Ionicons.mic,
-                    color: _hasText ? Colors.white : kPrimaryColor,
+                    color: _hasText ? Colors.white : kMedicalBlue,
                     size: 18,
                   ),
                 ),

@@ -3,7 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:login_screen/utils/helper_functions.dart';
 
 import '../../../utils/constants.dart';
-import '../../chat_screen/chat_screen.dart'; // Import chat screen
+import '../../doctor_selection_screen/doctor_selection_screen.dart'; // Import doctor selection screen
 import '../animations/change_screen_animation.dart';
 import 'bottom_text.dart';
 import 'top_text.dart';
@@ -39,7 +39,7 @@ class _LoginContentState extends State<LoginContent>
         height: 50,
         child: Material(
           elevation: 8,
-          shadowColor: Colors.black87,
+          shadowColor: kMedicalBlue.withOpacity(0.2),
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(30),
           child: TextField(
@@ -50,9 +50,20 @@ class _LoginContentState extends State<LoginContent>
                 borderSide: BorderSide.none,
               ),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: kCardBackground,
               hintText: hint,
-              prefixIcon: Icon(iconData),
+              hintStyle: TextStyle(
+                color: kTextSecondary,
+                fontFamily: 'Montserrat',
+              ),
+              prefixIcon: Icon(
+                iconData,
+                color: kMedicalBlue,
+              ),
+            ),
+            style: const TextStyle(
+              fontFamily: 'Montserrat',
+              color: kTextPrimary,
             ),
           ),
         ),
@@ -65,20 +76,20 @@ class _LoginContentState extends State<LoginContent>
       padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 16),
       child: ElevatedButton(
         onPressed: () {
-          // Navigate to chat screen
+          // Navigate to doctor selection screen
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ChatScreen(),
+              builder: (context) => const DoctorSelectionScreen(),
             ),
           );
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: const StadiumBorder(),
-          backgroundColor: kSecondaryColor,
+          backgroundColor: kMedicalBlue,
           elevation: 8,
-          shadowColor: Colors.black87,
+          shadowColor: kMedicalBlue.withOpacity(0.4),
         ),
         child: Text(
           title,
@@ -86,6 +97,7 @@ class _LoginContentState extends State<LoginContent>
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.white,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-
+import '../../../utils/constants.dart';
+import '../../doctor_selection_screen/models/doctor_model.dart';
+import 'doctor_details_modal.dart';
 
 class ChatAppBar extends StatelessWidget {
   final String doctorName;
   final bool isOnline;
+  final Doctor? doctor;
 
   const ChatAppBar({
     Key? key,
     required this.doctorName,
     required this.isOnline,
+    this.doctor,
   }) : super(key: key);
 
   @override
@@ -17,12 +21,12 @@ class ChatAppBar extends StatelessWidget {
     return Container(
       height: 100,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 78, 209, 185), // Same blue as login button
+        gradient: kMedicalGradient, // Use medical gradient
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: kMedicalBlue.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -66,44 +70,66 @@ class ChatAppBar extends StatelessWidget {
               
               const SizedBox(width: 12),
               
-              // Doctor Info
+              // Doctor Info - Clickable Area
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      doctorName,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
+                child: GestureDetector(
+                  onTap: () {
+                    if (doctor != null) {
+                      DoctorDetailsModal.show(context, doctor!);
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: isOnline ? Colors.green : Colors.grey,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                doctorName,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
+                            ),
+                            if (doctor != null)
+                              Icon(
+                                Ionicons.information_circle_outline,
+                                color: Colors.white.withOpacity(0.7),
+                                size: 16,
+                              ),
+                          ],
                         ),
-                        const SizedBox(width: 6),
-                        Text(
-                          isOnline ? 'Online' : 'Offline',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white.withOpacity(0.8),
-                            fontFamily: 'Montserrat',
-                          ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: isOnline ? Colors.green : Colors.grey,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              isOnline ? 'Online' : 'Offline',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.white.withOpacity(0.8),
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               
