@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../utils/constants.dart';
 import '../../doctor_selection_screen/models/doctor_model.dart';
+import '../../call_screen/call_screen.dart';
 
 class DoctorDetailsModal extends StatelessWidget {
   final Doctor doctor;
@@ -246,7 +247,15 @@ class DoctorDetailsModal extends StatelessWidget {
             color: kMedicalBlue,
             onTap: () {
               Navigator.pop(context);
-              // Video call functionality
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CallScreen(
+                    doctor: doctor,
+                    isVideoCall: true,
+                  ),
+                ),
+              );
             },
           ),
         ),
@@ -258,7 +267,15 @@ class DoctorDetailsModal extends StatelessWidget {
             color: kSecondaryColor,
             onTap: () {
               Navigator.pop(context);
-              // Voice call functionality
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CallScreen(
+                    doctor: doctor,
+                    isVideoCall: false,
+                  ),
+                ),
+              );
             },
           ),
         ),

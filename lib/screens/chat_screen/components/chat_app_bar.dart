@@ -3,6 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../../utils/constants.dart';
 import '../../doctor_selection_screen/models/doctor_model.dart';
 import 'doctor_details_modal.dart';
+import '../../call_screen/call_screen.dart';
 
 class ChatAppBar extends StatelessWidget {
   final String doctorName;
@@ -19,7 +20,7 @@ class ChatAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90, // Reduced from 100
       decoration: BoxDecoration(
         gradient: kMedicalGradient, // Use medical gradient
         boxShadow: [
@@ -32,7 +33,7 @@ class ChatAppBar extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4), // Reduced padding
           child: Row(
             children: [
               // Back Button
@@ -43,19 +44,24 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.arrow_back,
                   color: Colors.white,
-                  size: 24,
+                  size: 22, // Reduced from 24
+                ),
+                padding: const EdgeInsets.all(8), // Reduced padding
+                constraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
                 ),
               ),
               
-              const SizedBox(width: 8),
+              const SizedBox(width: 4), // Reduced from default spacing
               
               // Doctor Avatar
               Container(
-                width: 40,
-                height: 40,
+                width: 36, // Reduced from 40
+                height: 36, // Reduced from 40
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(18), // Adjusted for new size
                   border: Border.all(
                     color: Colors.white.withOpacity(0.3),
                     width: 2,
@@ -64,11 +70,11 @@ class ChatAppBar extends StatelessWidget {
                 child: const Icon(
                   Ionicons.person,
                   color: Colors.white,
-                  size: 20,
+                  size: 18, // Reduced from 20
                 ),
               ),
               
-              const SizedBox(width: 12),
+              const SizedBox(width: 8), // Reduced from 12
               
               // Doctor Info - Clickable Area
               Expanded(
@@ -90,7 +96,7 @@ class ChatAppBar extends StatelessWidget {
                               child: Text(
                                 doctorName,
                                 style: const TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 12, // Reduced from 13
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -136,23 +142,53 @@ class ChatAppBar extends StatelessWidget {
               // Action Buttons
               IconButton(
                 onPressed: () {
-                  // Video call functionality
+                  if (doctor != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CallScreen(
+                          doctor: doctor!,
+                          isVideoCall: true,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 icon: const Icon(
                   Ionicons.videocam,
                   color: Colors.white,
-                  size: 24,
+                  size: 20, // Reduced from 24
+                ),
+                padding: const EdgeInsets.all(8), // Reduced padding
+                constraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
                 ),
               ),
               
               IconButton(
                 onPressed: () {
-                  // Voice call functionality
+                  if (doctor != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CallScreen(
+                          doctor: doctor!,
+                          isVideoCall: false,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 icon: const Icon(
                   Ionicons.call,
                   color: Colors.white,
-                  size: 24,
+                  size: 20, // Reduced from 24
+                ),
+                padding: const EdgeInsets.all(8), // Reduced padding
+                constraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
                 ),
               ),
               
@@ -163,7 +199,12 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.ellipsis_vertical,
                   color: Colors.white,
-                  size: 20,
+                  size: 18, // Reduced from 20
+                ),
+                padding: const EdgeInsets.all(8), // Reduced padding
+                constraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
                 ),
               ),
             ],
