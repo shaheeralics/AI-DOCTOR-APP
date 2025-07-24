@@ -1,0 +1,281 @@
+import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+import '../../../utils/constants.dart';
+
+class ChatInput extends StatefulWidget {
+  final TextEditingController messageController;
+  final VoidCallback onSendMessage;
+
+  const ChatInput({
+    Key? key,
+    required this.messageController,
+    required this.onSendMessage,
+  }) : super(key: key);
+
+  @override
+  State<ChatInput> createState() => _ChatInputState();
+}
+
+class _ChatInputState extends State<ChatInput> {
+  bool _hasText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.messageController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      _hasText = widget.messageController.text.trim().isNotEmpty;
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.messageController.removeListener(_onTextChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              // Attachment Button
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    // Show attachment options
+                    _showAttachmentOptions(context);
+                  },
+                  icon: Icon(
+                    Ionicons.add,
+                    color: kPrimaryColor,
+                    size: 20,
+                  ),
+                ),
+              ),
+              
+              const SizedBox(width: 12),
+              
+              // Message Input Field
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: kBackgroundColor.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: kPrimaryColor.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: widget.messageController,
+                          maxLines: null,
+                          textCapitalization: TextCapitalization.sentences,
+                          decoration: InputDecoration(
+                            hintText: 'Type a message...',
+                            hintStyle: TextStyle(
+                              color: kPrimaryColor.withOpacity(0.6), // Use login screen colors
+                              fontSize: 16,
+                              fontFamily: 'Montserrat',
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Montserrat',
+                          ),
+                          onSubmitted: (_) => widget.onSendMessage(),
+                        ),
+                      ),
+                      
+                      // Emoji Button
+                      IconButton(
+                        onPressed: () {
+                          // Show emoji picker
+                        },
+                        icon: Icon(
+                          Ionicons.happy_outline,
+                          color: kPrimaryColor, // Use login screen colors
+                          size: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              const SizedBox(width: 12),
+              
+              // Send Button / Voice Button
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: _hasText ? kSecondaryColor : kPrimaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: IconButton(
+                  onPressed: _hasText ? widget.onSendMessage : () {
+                    // Voice recording functionality
+                  },
+                  icon: Icon(
+                    _hasText ? Ionicons.send : Ionicons.mic,
+                    color: _hasText ? Colors.white : kPrimaryColor,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showAttachmentOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Handle bar
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: kPrimaryColor.withOpacity(0.3), // Use login screen colors
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            
+            const SizedBox(height: 20),
+            
+            const Text(
+              'Share Your Medical Records',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Montserrat',
+                color: kPrimaryColor, // Use login screen colors
+              ),
+            ),
+            
+            const SizedBox(height: 20),
+            
+            // Attachment Options
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildAttachmentOption(
+                  icon: Ionicons.camera,
+                  label: 'Camera',
+                  color: kSecondaryColor, // Use login screen blue
+                  onTap: () {
+                    Navigator.pop(context);
+                    // Camera functionality
+                  },
+                ),
+                _buildAttachmentOption(
+                  icon: Ionicons.images,
+                  label: 'Gallery',
+                  color: kSecondaryColor, // Use login screen blue
+                  onTap: () {
+                    Navigator.pop(context);
+                    // Gallery functionality
+                  },
+                ),
+                _buildAttachmentOption(
+                  icon: Ionicons.document,
+                  label: 'Document',
+                  color: kSecondaryColor, // Use login screen blue
+                  onTap: () {
+                    Navigator.pop(context);
+                    // Document functionality
+                  },
+                ),
+                
+              ],
+            ),
+            
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAttachmentOption({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(
+                color: color.withOpacity(0.3),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              icon,
+              color: color,
+              size: 24,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: kPrimaryColor, // Use login screen colors
+              fontFamily: 'Montserrat',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
