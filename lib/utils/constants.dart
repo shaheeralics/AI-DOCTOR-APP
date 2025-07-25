@@ -13,7 +13,7 @@ const kTextSecondary = Color(0xFF6C757D); // Secondary text color
 
 // Gradient Colors
 final kMedicalGradient = LinearGradient(
-  colors: [kMedicalBlue, kSecondaryColor],
+  colors: [Color.fromARGB(255, 0, 180, 216), kSecondaryColor],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );

@@ -27,25 +27,35 @@ class _TopTextState extends State<TopText> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity, // Take full available width
-      height: 120,
+      height: 160, // Increased from 120 to 160 to accommodate all content
       padding: const EdgeInsets.symmetric(horizontal: 24), // Add padding for the left text
       child: Column(
         children: [
           // AI DOCTOR - Perfectly centered
+
+          const Text(
+            'AI',
+            style: TextStyle(
+                fontSize:28,
+                fontWeight: FontWeight.bold,
+                color : Color.fromARGB(255, 2, 119, 203)
+            ),
+            
+          ),
           const Center(
             child:  Text(
-              'AI DOCTOR',
+              'DOCTOR',
               style:  TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Color.fromARGB(255, 0, 180, 216)
               ),
             ),
           ),
           const SizedBox(height: 35), // Space between the texts
           // Create Account / Welcome Back - Left aligned within the padded container
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: HelperFunctions.wrapWithAnimatedBuilder(
               animation: ChangeScreenAnimation.topTextAnimation,
               child: Text(
