@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../utils/constants.dart';
+import 'voice_message_ui.dart';
 
 class ChatInput extends StatefulWidget {
   final TextEditingController messageController;
@@ -18,6 +19,7 @@ class ChatInput extends StatefulWidget {
 
 class _ChatInputState extends State<ChatInput> {
   bool _hasText = false;
+  bool _isRecording = false;
 
   @override
   void initState() {
@@ -39,139 +41,168 @@ class _ChatInputState extends State<ChatInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: kCardBackground,
-        boxShadow: [
-          BoxShadow(
-            color: kMedicalBlue.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Voice Message UI (shown when recording)
+        if (_isRecording)
+          VoiceMessageUI(
+            onCancel: () {
+              setState(() {
+                _isRecording = false;
+              });
+            },
+            onSend: () {
+              setState(() {
+                _isRecording = false;
+              });
+              // Handle voice message send
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Voice message sent!'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
+            onLock: () {
+              // Handle voice message lock
+            },
           ),
-        ],
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              // Attachment Button
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: kPrimaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
+        
+        // Regular chat input
+        if (!_isRecording)
+          Container(
+            decoration: BoxDecoration(
+              color: kCardBackground,
+              boxShadow: [
+                BoxShadow(
+                  color: kMedicalBlue.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, -2),
                 ),
-                child: IconButton(
-                  onPressed: () {
-                    // Show attachment options
-                    _showAttachmentOptions(context);
-                  },
-                  icon: Icon(
-                    Ionicons.add,
-                    color: kPrimaryColor,
-                    size: 20,
-                  ),
-                ),
-              ),
-              
-              const SizedBox(width: 12),
-              
-              // Message Input Field
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: kBackgroundColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: kMedicalBlue.withOpacity(0.2),
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: widget.messageController,
-                          maxLines: null,
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: InputDecoration(
-                            hintText: 'Type a message...',
-                            hintStyle: TextStyle(
-                              color: kPrimaryColor.withOpacity(0.6),
-                              fontSize: 16,
-                              fontFamily: 'Montserrat',
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 12,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Montserrat',
-                          ),
-                          onSubmitted: (_) => widget.onSendMessage(),
-                        ),
+              ],
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    // Attachment Button
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: kPrimaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      
-                      // Emoji Button
-                      IconButton(
+                      child: IconButton(
                         onPressed: () {
-                          // Show emoji picker
+                          // Show attachment options
+                          _showAttachmentOptions(context);
                         },
                         icon: Icon(
-                          Ionicons.happy_outline,
+                          Ionicons.add,
                           color: kPrimaryColor,
                           size: 20,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              
-              const SizedBox(width: 12),
-              
-              // Send Button / Voice Button
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  gradient: _hasText ? kMedicalGradient : null,
-                  color: _hasText ? null : kMedicalBlue.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: _hasText ? [
-                    BoxShadow(
-                      color: kMedicalBlue.withOpacity(0.3),
-                      blurRadius: 6,
-                      offset: const Offset(0, 2),
                     ),
-                  ] : null,
-                ),
-                child: IconButton(
-                  onPressed: _hasText ? widget.onSendMessage : () {
-                    // Voice recording functionality (disabled for now)
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Voice messages coming soon!'),
-                        duration: Duration(seconds: 2),
+                    
+                    const SizedBox(width: 12),
+                    
+                    // Message Input Field
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: kBackgroundColor.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(
+                            color: kMedicalBlue.withOpacity(0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: widget.messageController,
+                                maxLines: null,
+                                textCapitalization: TextCapitalization.sentences,
+                                decoration: InputDecoration(
+                                  hintText: 'Type a message...',
+                                  hintStyle: TextStyle(
+                                    color: kPrimaryColor.withOpacity(0.6),
+                                    fontSize: 16,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 12,
+                                  ),
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Montserrat',
+                                ),
+                                onSubmitted: (_) => widget.onSendMessage(),
+                              ),
+                            ),
+                            
+                            // Emoji Button
+                            IconButton(
+                              onPressed: () {
+                                // Show emoji picker
+                              },
+                              icon: Icon(
+                                Ionicons.happy_outline,
+                                color: kPrimaryColor,
+                                size: 20,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    );
-                  },
-                  icon: Icon(
-                    _hasText ? Ionicons.send : Ionicons.mic,
-                    color: _hasText ? Colors.white : kMedicalBlue,
-                    size: 18,
-                  ),
+                    ),
+                    
+                    const SizedBox(width: 12),
+                    
+                    // Send Button / Voice Button
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        gradient: _hasText ? kMedicalGradient : null,
+                        color: _hasText ? null : kMedicalBlue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: _hasText ? [
+                          BoxShadow(
+                            color: kMedicalBlue.withOpacity(0.3),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ] : null,
+                      ),
+                      child: IconButton(
+                        onPressed: _hasText ? widget.onSendMessage : () {
+                          // Start voice recording UI
+                          setState(() {
+                            _isRecording = true;
+                          });
+                        },
+                        icon: Icon(
+                          _hasText ? Ionicons.send : Ionicons.mic,
+                          color: _hasText ? Colors.white : kMedicalBlue,
+                          size: 18,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+      ],
     );
   }
 

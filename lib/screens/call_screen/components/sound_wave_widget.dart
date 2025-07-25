@@ -98,8 +98,8 @@ class _SoundWaveWidgetState extends State<SoundWaveWidget>
                     ? (widget.size * 0.4 * _animations[index].value) // Updated multiplier
                     : (widget.size * 0.08), // Reduced minimum height
                 decoration: BoxDecoration(
-                  color: widget.color.withOpacity(
-                    widget.isActive ? _animations[index].value : 0.3,
+                  color: widget.color.withValues(
+                    alpha: widget.isActive ? _animations[index].value : 0.3,
                   ),
                   borderRadius: BorderRadius.circular(1.5), // Reduced from 2
                 ),
@@ -225,7 +225,7 @@ class _PulseRippleWidgetState extends State<PulseRippleWidget>
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: widget.color.withOpacity(_opacityAnimations[index].value),
+                      color: widget.color.withValues(alpha: _opacityAnimations[index].value),
                       width: 1.5, // Reduced from 2
                     ),
                   ),

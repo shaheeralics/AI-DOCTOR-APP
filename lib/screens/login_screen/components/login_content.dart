@@ -3,7 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:login_screen/utils/helper_functions.dart';
 
 import '../../../utils/constants.dart';
-import '../../doctor_selection_screen/doctor_selection_screen.dart'; // Import doctor selection screen
+import '../../doctor_selection_screen/doctor_selection_screen.dart';
 import '../animations/change_screen_animation.dart';
 import 'bottom_text.dart';
 import 'top_text.dart';
@@ -31,7 +31,7 @@ class _LoginContentState extends State<LoginContent>
     super.dispose();
   }
 
-  // Input field
+  // Input field simplified
   Widget inputField(String hint, IconData iconData) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 8),
@@ -71,17 +71,16 @@ class _LoginContentState extends State<LoginContent>
     );
   }
 
+
+
   Widget loginButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 16),
       child: ElevatedButton(
         onPressed: () {
-          // TODO: Implement login logic
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const DoctorSelectionScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const DoctorSelectionScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
@@ -109,12 +108,9 @@ class _LoginContentState extends State<LoginContent>
       padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 16),
       child: ElevatedButton(
         onPressed: () {
-          // TODO: Implement sign up logic
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const DoctorSelectionScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const DoctorSelectionScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
@@ -175,9 +171,49 @@ class _LoginContentState extends State<LoginContent>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/facebook.png'),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DoctorSelectionScreen()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Image.asset('assets/images/facebook.png'),
+            ),
+          ),
           const SizedBox(width: 24),
-          Image.asset('assets/images/google.png'),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DoctorSelectionScreen()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Image.asset('assets/images/google.png'),
+            ),
+          ),
         ],
       ),
     );
@@ -249,8 +285,8 @@ class _LoginContentState extends State<LoginContent>
       children: [
         const Positioned(
           top: 80,
-          left: 0, // Changed from 24 to 0
-          right: 0, // Added right: 0 to make it take full width for centering
+          left: 0,
+          right: 0,
           child: TopText(),
         ),
         Padding(

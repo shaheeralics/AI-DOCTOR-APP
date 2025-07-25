@@ -87,7 +87,7 @@ class _CallScreenState extends State<CallScreen>
     
     _backgroundAnimation = ColorTween(
       begin: kBackgroundColor,
-      end: kMedicalBlue.withOpacity(0.05),
+      end: kMedicalBlue.withValues(alpha: 0.05),
     ).animate(CurvedAnimation(
       parent: _backgroundController,
       curve: Curves.easeInOut,
@@ -239,7 +239,7 @@ class _CallScreenState extends State<CallScreen>
               gradient: LinearGradient(
                 colors: [
                   _backgroundAnimation.value ?? kBackgroundColor,
-                  kMedicalBlue.withOpacity(0.1),
+                  kMedicalBlue.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -274,7 +274,7 @@ class _CallScreenState extends State<CallScreen>
         children: [
           Text(
             widget.isVideoCall ? 'Video Call' : 'Voice Call',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14, // Reduced from 16
               color: kTextSecondary,
               fontFamily: 'Montserrat',
@@ -293,7 +293,7 @@ class _CallScreenState extends State<CallScreen>
           const SizedBox(height: 2), // Reduced from 4
           Text(
             widget.doctor.specialty,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12, // Reduced from 14
               color: kTextSecondary,
               fontFamily: 'Montserrat',
@@ -303,7 +303,7 @@ class _CallScreenState extends State<CallScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), // Reduced padding
             decoration: BoxDecoration(
-              color: kMedicalBlue.withOpacity(0.1),
+              color: kMedicalBlue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16), // Reduced from 20
             ),
             child: Text(
@@ -407,18 +407,18 @@ class _CallScreenState extends State<CallScreen>
                 border: Border.all(
                   color: isSpeaking 
                       ? (isDoctor ? kMedicalBlue : kSecondaryColor)
-                      : kMedicalBlue.withOpacity(0.3),
+                      : kMedicalBlue.withValues(alpha: 0.3),
                   width: isSpeaking ? 3 : 2, // Reduced border width
                 ),
                 boxShadow: isSpeaking ? [
                   BoxShadow(
-                    color: (isDoctor ? kMedicalBlue : kSecondaryColor).withOpacity(0.3),
+                    color: (isDoctor ? kMedicalBlue : kSecondaryColor).withValues(alpha: 0.3),
                     blurRadius: 15, // Reduced shadow
                     spreadRadius: 3, // Reduced shadow
                   ),
                 ] : [
                   BoxShadow(
-                    color: kMedicalBlue.withOpacity(0.1),
+                    color: kMedicalBlue.withValues(alpha: 0.1),
                     blurRadius: 8, // Reduced shadow
                     spreadRadius: 1, // Reduced shadow
                   ),
@@ -475,10 +475,10 @@ class _CallScreenState extends State<CallScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Reduced padding
       decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.1),
+        color: statusColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20), // Reduced from 25
         border: Border.all(
-          color: statusColor.withOpacity(0.3),
+          color: statusColor.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -569,12 +569,12 @@ class _CallScreenState extends State<CallScreen>
           color: isActive ? color : kCardBackground,
           shape: BoxShape.circle,
           border: Border.all(
-            color: color.withOpacity(0.3),
+            color: color.withValues(alpha: 0.3),
             width: 2,
           ),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               blurRadius: 10,
               spreadRadius: 2,
             ),
