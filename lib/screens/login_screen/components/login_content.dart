@@ -338,40 +338,43 @@ class _LoginContentState extends State<LoginContent>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const Positioned(
-          top: 80,
-          left: 0, // Changed from 24 to 0
-          right: 0, // Added right: 0 to make it take full width for centering
-          child: TopText(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: createAccountContent,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: loginContent,
-              ),
-            ],
+    return Form(
+      key: _formKey,
+      child: Stack(
+        children: [
+          const Positioned(
+            top: 80,
+            left: 0, // Changed from 24 to 0
+            right: 0, // Added right: 0 to make it take full width for centering
+            child: TopText(),
           ),
-        ),
-        
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 50),
-            child: BottomText(),
+          Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: createAccountContent,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: loginContent,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+          
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 50),
+              child: BottomText(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
