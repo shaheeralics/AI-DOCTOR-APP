@@ -296,17 +296,17 @@ class _LoginContentState extends State<LoginContent>
   @override
   void initState() {
     createAccountContent = [
-      inputField('Name', Ionicons.person_outline),
-      inputField('Email', Ionicons.mail_outline),
-      inputField('Password', Ionicons.lock_closed_outline),
+      inputField('Name', Ionicons.person_outline, controller: _nameController),
+      inputField('Email', Ionicons.mail_outline, controller: _emailController),
+      inputField('Password', Ionicons.lock_closed_outline, controller: _passwordController, isPassword: true),
       loginButton('Sign Up'),
       orDivider(),
       logos(),
     ];
 
     loginContent = [
-      inputField('Email', Ionicons.mail_outline),
-      inputField('Password', Ionicons.lock_closed_outline),
+      inputField('Email', Ionicons.mail_outline, controller: _emailController),
+      inputField('Password', Ionicons.lock_closed_outline, controller: _passwordController, isPassword: true),
       loginButton('Log In'),
       forgotPassword(),
       orDivider(),
