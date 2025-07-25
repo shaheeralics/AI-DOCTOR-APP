@@ -9,7 +9,7 @@ class DoctorsData {
     return [
       const Doctor(
         id: 'ent_001',
-        name: 'Dr. Hearwell',
+        name: 'Dr. Muhammad Ahmed Khan',
         specialty: 'ENT Specialist',
         description: 'Expert in ear, nose & throat care with 15+ years experience',
         iconPath: 'assets/icons/ent_doctor.png', // Future: real profile images
@@ -19,7 +19,7 @@ class DoctorsData {
       ),
       const Doctor(
         id: 'cardio_001',
-        name: 'Dr. Heartbeat',
+        name: 'Dr. Fatima Ali Shah',
         specialty: 'Cardiologist',
         description: 'Specialist in heart & blood vessels with advanced cardiac care',
         iconPath: 'assets/icons/cardio_doctor.png',
@@ -29,7 +29,7 @@ class DoctorsData {
       ),
       const Doctor(
         id: 'neuro_001',
-        name: 'Dr. NeuroNet',
+        name: 'Dr. Hassan Mahmood',
         specialty: 'Neurologist',
         description: 'Brain & nervous system expert specializing in neural disorders',
         iconPath: 'assets/icons/neuro_doctor.png',
@@ -39,17 +39,17 @@ class DoctorsData {
       ),
       const Doctor(
         id: 'derma_001',
-        name: 'Dr. SkinCare',
+        name: 'Dr. Ayesha Rizvi',
         specialty: 'Dermatologist',
         description: 'Skin, hair & nail specialist with cosmetic expertise',
         iconPath: 'assets/icons/derma_doctor.png',
-        isAvailable: false,
+        isAvailable: true,
         tags: ['Dermatology', 'Skin', 'Hair', 'Cosmetic'],
-        availabilityText: 'Available at 3:00 PM',
+        availabilityText: 'Available Now',
       ),
       const Doctor(
         id: 'ortho_001',
-        name: 'Dr. BoneStrong',
+        name: 'Dr. Imran Qureshi',
         specialty: 'Orthopedic Surgeon',
         description: 'Bone, joint & muscle specialist with surgical expertise',
         iconPath: 'assets/icons/ortho_doctor.png',

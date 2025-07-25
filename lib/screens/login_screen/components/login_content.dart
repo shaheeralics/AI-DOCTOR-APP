@@ -183,6 +183,8 @@ class _LoginContentState extends State<LoginContent>
       inputField('Password', Ionicons.lock_closed_outline),
       loginButton('Log In'),
       forgotPassword(),
+      orDivider(),
+      logos(),
     ];
 
     ChangeScreenAnimation.initialize(

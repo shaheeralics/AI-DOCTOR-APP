@@ -99,7 +99,7 @@ class _ChatInputState extends State<ChatInput> {
                           decoration: InputDecoration(
                             hintText: 'Type a message...',
                             hintStyle: TextStyle(
-                              color: kPrimaryColor.withOpacity(0.6), // Use login screen colors
+                              color: kPrimaryColor.withOpacity(0.6),
                               fontSize: 16,
                               fontFamily: 'Montserrat',
                             ),
@@ -124,7 +124,7 @@ class _ChatInputState extends State<ChatInput> {
                         },
                         icon: Icon(
                           Ionicons.happy_outline,
-                          color: kPrimaryColor, // Use login screen colors
+                          color: kPrimaryColor,
                           size: 20,
                         ),
                       ),
@@ -153,7 +153,13 @@ class _ChatInputState extends State<ChatInput> {
                 ),
                 child: IconButton(
                   onPressed: _hasText ? widget.onSendMessage : () {
-                    // Voice recording functionality
+                    // Voice recording functionality (disabled for now)
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Voice messages coming soon!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
                   },
                   icon: Icon(
                     _hasText ? Ionicons.send : Ionicons.mic,

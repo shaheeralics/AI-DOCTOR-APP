@@ -104,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     // Get doctor info from selected doctor or use default
-    final doctorName = widget.selectedDoctor?.name ?? "Dr. AI";
+    final doctorName = widget.selectedDoctor?.name ?? "Dr. Asma Malik";
     final isOnline = widget.selectedDoctor?.isAvailable ?? true;
     
     return AnimatedBuilder(

@@ -136,10 +136,10 @@ class _DoctorCardState extends State<DoctorCard>
                   onTap: _onCardTap,
                   child: Container(
                     margin: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 8,
+                      horizontal: 16, // Further reduced from 18
+                      vertical: 5, // Further reduced from 6
                     ),
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(16), // Further reduced from 18
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -196,7 +196,7 @@ class _DoctorCardState extends State<DoctorCard>
                           },
                         ),
 
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14), // Reduced from 16
 
                         // Doctor Info
                         Expanded(
@@ -207,14 +207,14 @@ class _DoctorCardState extends State<DoctorCard>
                               Text(
                                 widget.doctor.name,
                                 style: const TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16, // Reduced from 18
                                   fontWeight: FontWeight.bold,
                                   color: kPrimaryColor,
                                   fontFamily: 'Montserrat',
                                 ),
                               ),
                               
-                              const SizedBox(height: 4),
+                              const SizedBox(height: 2), // Further reduced from 3
                               
                               // Specialty with colored background
                               Container(
@@ -237,13 +237,13 @@ class _DoctorCardState extends State<DoctorCard>
                                 ),
                               ),
                               
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 3), // Further reduced from 4
                               
                               // Description
                               Text(
                                 widget.doctor.description,
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 12, // Reduced from 13
                                   color: Colors.grey[600],
                                   fontFamily: 'Montserrat',
                                 ),
@@ -251,7 +251,7 @@ class _DoctorCardState extends State<DoctorCard>
                                 overflow: TextOverflow.ellipsis,
                               ),
                               
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 3), // Further reduced from 4
                               
                               // Availability Status
                               Row(

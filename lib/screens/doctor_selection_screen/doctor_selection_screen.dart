@@ -119,8 +119,8 @@ class _DoctorSelectionScreenState extends State<DoctorSelectionScreen>
               // Statistics Row (Optional Enhancement)
               if (!_isLoading && _allDoctors.isNotEmpty)
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  margin: const EdgeInsets.symmetric(horizontal: 18), // Reduced from 20
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14), // Reduced padding
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(15),
@@ -139,7 +139,7 @@ class _DoctorSelectionScreenState extends State<DoctorSelectionScreen>
                       ),
                       Container(
                         width: 1,
-                        height: 30,
+                        height: 28, // Reduced from 30
                         color: Colors.grey[300],
                       ),
                       _buildStatItem(
@@ -161,7 +161,7 @@ class _DoctorSelectionScreenState extends State<DoctorSelectionScreen>
                   ),
                 ),
               
-              const SizedBox(height: 16),
+              const SizedBox(height: 12), // Reduced from 16
               
               // Doctors List
               Expanded(
@@ -204,13 +204,13 @@ class _DoctorSelectionScreenState extends State<DoctorSelectionScreen>
         Icon(
           icon,
           color: const Color(0xFF00B4D8),
-          size: 20,
+          size: 18, // Reduced from 20
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 3), // Reduced from 4
         Text(
           value,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 14, // Reduced from 16
             fontWeight: FontWeight.bold,
             color: kPrimaryColor,
             fontFamily: 'Montserrat',
@@ -219,7 +219,7 @@ class _DoctorSelectionScreenState extends State<DoctorSelectionScreen>
         Text(
           label,
           style: TextStyle(
-            fontSize: 10,
+            fontSize: 9, // Reduced from 10
             color: Colors.grey[600],
             fontFamily: 'Montserrat',
           ),

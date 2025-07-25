@@ -6,12 +6,12 @@ class DoctorSelectionAppBar extends StatelessWidget implements PreferredSizeWidg
   const DoctorSelectionAppBar({Key? key}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(90); // Reduced from 100
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90, // Reduced from 100
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -31,7 +31,7 @@ class DoctorSelectionAppBar extends StatelessWidget implements PreferredSizeWidg
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6), // Reduced padding
           child: Row(
             children: [
               // Back Button with Animation
@@ -68,7 +68,7 @@ class DoctorSelectionAppBar extends StatelessWidget implements PreferredSizeWidg
                             child: const Text(
                               'Choose Your Specialist',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18, // Reduced from 20
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontFamily: 'Montserrat',
@@ -90,7 +90,7 @@ class DoctorSelectionAppBar extends StatelessWidget implements PreferredSizeWidg
                             child: Text(
                               'Select the right doctor for your needs',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 11, // Reduced from 12
                                 color: Colors.white.withOpacity(0.9),
                                 fontFamily: 'Montserrat',
                               ),

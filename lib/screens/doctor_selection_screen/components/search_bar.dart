@@ -85,7 +85,7 @@ class _SearchBarState extends State<SearchBar>
           child: Opacity(
             opacity: _opacityAnimation.value,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 14), // Reduced margins
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(25),

@@ -98,8 +98,8 @@ class _DoctorListState extends State<DoctorList>
           opacity: _fadeAnimation,
           child: ListView.builder(
             padding: const EdgeInsets.only(
-              top: 8,
-              bottom: 20,
+              top: 2, // Further reduced from 4
+              bottom: 12, // Further reduced from 16
             ),
             itemCount: widget.doctors.length,
             itemBuilder: (context, index) {
