@@ -5,7 +5,7 @@ import '../../doctor_selection_screen/models/doctor_model.dart';
 import 'doctor_details_modal.dart';
 import '../../call_screen/call_screen.dart';
 
-class ChatAppBar extends StatelessWidget {
+class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String doctorName;
   final bool isOnline;
   final Doctor? doctor;
@@ -18,9 +18,11 @@ class ChatAppBar extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  Size get preferredSize => const Size.fromHeight(75);
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90, // Reduced from 100
       decoration: BoxDecoration(
         gradient: kMedicalGradient, // Use medical gradient
         boxShadow: [
@@ -32,8 +34,9 @@ class ChatAppBar extends StatelessWidget {
         ],
       ),
       child: SafeArea(
+        bottom: false,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4), // Reduced padding
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
           child: Row(
             children: [
               // Back Button
@@ -44,24 +47,24 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.arrow_back,
                   color: Colors.white,
-                  size: 22, // Reduced from 24
+                  size: 20,
                 ),
-                padding: const EdgeInsets.all(8), // Reduced padding
+                padding: const EdgeInsets.all(4),
                 constraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
+                  minWidth: 28,
+                  minHeight: 28,
                 ),
               ),
               
-              const SizedBox(width: 4), // Reduced from default spacing
+              const SizedBox(width: 2),
               
               // Doctor Avatar
               Container(
-                width: 36, // Reduced from 40
-                height: 36, // Reduced from 40
+                width: 32,
+                height: 32,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(18), // Adjusted for new size
+                  borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: Colors.white.withOpacity(0.3),
                     width: 2,
@@ -70,11 +73,11 @@ class ChatAppBar extends StatelessWidget {
                 child: const Icon(
                   Ionicons.person,
                   color: Colors.white,
-                  size: 18, // Reduced from 20
+                  size: 16,
                 ),
               ),
               
-              const SizedBox(width: 8), // Reduced from 12
+              const SizedBox(width: 6),
               
               // Doctor Info - Clickable Area
               Expanded(
@@ -85,7 +88,7 @@ class ChatAppBar extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 2),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,37 +99,39 @@ class ChatAppBar extends StatelessWidget {
                               child: Text(
                                 doctorName,
                                 style: const TextStyle(
-                                  fontSize: 12, // Reduced from 13
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             if (doctor != null)
                               Icon(
                                 Ionicons.information_circle_outline,
                                 color: Colors.white.withOpacity(0.7),
-                                size: 16,
+                                size: 14,
                               ),
                           ],
                         ),
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 1),
                         Row(
                           children: [
                             Container(
-                              width: 8,
-                              height: 8,
+                              width: 6,
+                              height: 6,
                               decoration: BoxDecoration(
                                 color: isOnline ? Colors.green : Colors.grey,
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(3),
                               ),
                             ),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 4),
                             Text(
                               isOnline ? 'Online' : 'Offline',
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 9,
                                 color: Colors.white.withOpacity(0.8),
                                 fontFamily: 'Montserrat',
                               ),
@@ -157,12 +162,12 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.videocam,
                   color: Colors.white,
-                  size: 20, // Reduced from 24
+                  size: 18,
                 ),
-                padding: const EdgeInsets.all(8), // Reduced padding
+                padding: const EdgeInsets.all(4),
                 constraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
+                  minWidth: 28,
+                  minHeight: 28,
                 ),
               ),
               
@@ -183,12 +188,12 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.call,
                   color: Colors.white,
-                  size: 20, // Reduced from 24
+                  size: 18,
                 ),
-                padding: const EdgeInsets.all(8), // Reduced padding
+                padding: const EdgeInsets.all(4),
                 constraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
+                  minWidth: 28,
+                  minHeight: 28,
                 ),
               ),
               
@@ -199,12 +204,12 @@ class ChatAppBar extends StatelessWidget {
                 icon: const Icon(
                   Ionicons.ellipsis_vertical,
                   color: Colors.white,
-                  size: 18, // Reduced from 20
+                  size: 16,
                 ),
-                padding: const EdgeInsets.all(8), // Reduced padding
+                padding: const EdgeInsets.all(4),
                 constraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
+                  minWidth: 28,
+                  minHeight: 28,
                 ),
               ),
             ],

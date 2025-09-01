@@ -83,19 +83,23 @@ class _ChatInputState extends State<ChatInput> {
               ],
             ),
             child: SafeArea(
+              top: false,
+              minimum: EdgeInsets.zero,
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: Row(
                   children: [
                     // Attachment Button
                     Container(
-                      width: 40,
-                      height: 40,
+                      width: 32,
+                      height: 32,
                       decoration: BoxDecoration(
                         color: kPrimaryColor.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
                         onPressed: () {
                           // Show attachment options
                           _showAttachmentOptions(context);
@@ -103,12 +107,12 @@ class _ChatInputState extends State<ChatInput> {
                         icon: Icon(
                           Ionicons.add,
                           color: kPrimaryColor,
-                          size: 20,
+                          size: 16,
                         ),
                       ),
                     ),
                     
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                     
                     // Message Input Field
                     Expanded(
@@ -132,17 +136,17 @@ class _ChatInputState extends State<ChatInput> {
                                   hintText: 'Type a message...',
                                   hintStyle: TextStyle(
                                     color: kPrimaryColor.withOpacity(0.6),
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontFamily: 'Montserrat',
                                   ),
                                   border: InputBorder.none,
                                   contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 12,
+                                    horizontal: 16,
+                                    vertical: 8,
                                   ),
                                 ),
                                 style: const TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   fontFamily: 'Montserrat',
                                 ),
                                 onSubmitted: (_) => widget.onSendMessage(),
@@ -151,13 +155,18 @@ class _ChatInputState extends State<ChatInput> {
                             
                             // Emoji Button
                             IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(
+                                minWidth: 28,
+                                minHeight: 28,
+                              ),
                               onPressed: () {
                                 // Show emoji picker
                               },
                               icon: Icon(
                                 Ionicons.happy_outline,
                                 color: kPrimaryColor,
-                                size: 20,
+                                size: 16,
                               ),
                             ),
                           ],
@@ -165,16 +174,16 @@ class _ChatInputState extends State<ChatInput> {
                       ),
                     ),
                     
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                     
                     // Send Button / Voice Button
                     Container(
-                      width: 40,
-                      height: 40,
+                      width: 32,
+                      height: 32,
                       decoration: BoxDecoration(
                         gradient: _hasText ? kMedicalGradient : null,
                         color: _hasText ? null : kMedicalBlue.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(16),
                         boxShadow: _hasText ? [
                           BoxShadow(
                             color: kMedicalBlue.withOpacity(0.3),
@@ -184,6 +193,8 @@ class _ChatInputState extends State<ChatInput> {
                         ] : null,
                       ),
                       child: IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
                         onPressed: _hasText ? widget.onSendMessage : () {
                           // Start voice recording UI
                           setState(() {
@@ -193,7 +204,7 @@ class _ChatInputState extends State<ChatInput> {
                         icon: Icon(
                           _hasText ? Ionicons.send : Ionicons.mic,
                           color: _hasText ? Colors.white : kMedicalBlue,
-                          size: 18,
+                          size: 14,
                         ),
                       ),
                     ),

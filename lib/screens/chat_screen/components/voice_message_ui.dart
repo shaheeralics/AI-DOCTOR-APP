@@ -251,7 +251,7 @@ class _VoiceMessageUIState extends State<VoiceMessageUI>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _isLocked ? 140 : 80,
+      height: _isLocked ? 100 : 60,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -263,6 +263,8 @@ class _VoiceMessageUIState extends State<VoiceMessageUI>
         ],
       ),
       child: SafeArea(
+        top: false,
+        minimum: EdgeInsets.zero,
         child: _isLocked ? _buildLockedUI() : _buildRecordingUI(),
       ),
     );
@@ -295,7 +297,7 @@ class _VoiceMessageUIState extends State<VoiceMessageUI>
           
           // Main recording content
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Row(
               children: [
                 // Recording dot and time

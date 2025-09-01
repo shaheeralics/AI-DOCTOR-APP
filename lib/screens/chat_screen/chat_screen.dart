@@ -111,6 +111,14 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       animation: _backgroundAnimationController,
       builder: (context, child) {
         return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(75),
+            child: ChatAppBar(
+              doctorName: doctorName,
+              isOnline: isOnline,
+              doctor: widget.selectedDoctor,
+            ),
+          ),
           body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -124,13 +132,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             ),
             child: Column(
               children: [
-                // Custom App Bar
-                ChatAppBar(
-                  doctorName: doctorName,
-                  isOnline: isOnline,
-                  doctor: widget.selectedDoctor,
-                ),
-                
                 // Messages Area
                 Expanded(
                   child: ChatMessages(
